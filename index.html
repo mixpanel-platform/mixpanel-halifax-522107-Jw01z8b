@@ -10,6 +10,16 @@
     <div id="table"></div>
     <script>
       MP.api.ready(function() {
+         $('</div><br clear="all" /><span>' + "AVG Revenue per DAU (Using Unique SessionStart Events)" + '</span>').css({
+              'background': 'white',
+              'border': '1px solid #7a8195',
+              'border-radius': '5px',
+              'color': '#7a8195',
+              'display': 'inline-block',
+              'margin-bottom': '20px',
+              'margin-top': '10px',
+              'padding': '10px'            
+            }).appendTo('body');
         
         var dauEventName = 'SessionStart';
         var revenueEvent = 'Purchase';
