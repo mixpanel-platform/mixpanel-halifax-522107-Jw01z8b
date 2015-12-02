@@ -9,62 +9,13 @@
     
     <div id="table"></div>
     <script>
-      MP.api.ready(function() {
-         $('</div><br clear="all" /><span>' + "AVG Revenue per DAU (Using Unique SessionStart Events)" + '</span>').css({
-              'background': 'white',
-              'border': '1px solid #7a8195',
-              'border-radius': '5px',
-              'color': '#7a8195',
-              'display': 'inline-block',
-              'margin-bottom': '20px',
-              'margin-top': '10px',
-              'padding': '10px'            
-            }).appendTo('body');
-        
-        var dauEventName = 'SessionStart';
-        var revenueEvent = 'Purchase';
-        var revenueProp = 'amount';
-        
-        var dauParams = {
-          'unit': 'day',
-          'type': 'unique',
-          'from': moment().subtract(30, 'days')
-        }
-        
-         
-       
-        
-        var $dau = MP.api.events(dauEventName, dauParams);
-        var $revenue = MP.api.segment(revenueEvent, revenueProp, {from: moment().subtract(30, 'days'), method: 'sum'});
-        
-        
-        
-        $.when($dau, $revenue).done(function(dau, revenue){
-          var dauValues = dau.values();
-          var revenueValues = revenue.values();
-          var data = {
-              'ARPDAU': {
-              }
-          };
-          
-          
-          _.each(_.keys(dauValues[dauEventName]), function(key){
-              if (key in revenueValues && revenueValues[key] && dauValues[dauEventName][key]) {
-                  data['ARPDAU'][key] = revenueValues[key] / dauValues[dauEventName][key];
-              }
-          });
-          
-          var chart = $('<div></div>').appendTo('body').MPChart({chartType: 'line'});
-          
-          chart.MPChart('setData', data);
-          
-        });
         function main() {
             return Events({
                 from_date: params.from_date,
                 to_date: params.to_date
             }).reduce(mixpanel.reducer.count());
         }
+        var data = main()
         
         /*function main() {
             // Get all events in the given date range
