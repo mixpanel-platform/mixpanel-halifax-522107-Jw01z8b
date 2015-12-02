@@ -31,6 +31,9 @@
           'from': moment().subtract(30, 'days')
         }
         
+         
+       
+        
         var $dau = MP.api.events(dauEventName, dauParams);
         var $revenue = MP.api.segment(revenueEvent, revenueProp, {from: moment().subtract(30, 'days'), method: 'sum'});
         
@@ -56,6 +59,18 @@
           chart.MPChart('setData', data);
           
         });
+        
+        function main() {
+            // Get all events in the given date range
+            return Events({
+                from_date: dauParams.from_date,
+                to_date: dauParams.to_date,
+            })
+           .filter(function(event) { return event.name === "Purchase" })
+           .map(function(event) { return event["amount"] })
+           .reduce(mixpanel.reducer.numeric_summary());
+         }
+        console.log(main())
      
       });
     </script>
