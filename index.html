@@ -59,8 +59,14 @@
           chart.MPChart('setData', data);
           
         });
-        
         function main() {
+            return Events({
+                from_date: params.from_date,
+                to_date: params.to_date
+            }).reduce(mixpanel.reducer.count());
+        }
+        
+        /*function main() {
             // Get all events in the given date range
             return Events({
                 from_date: dauParams.from_date,
@@ -70,7 +76,7 @@
            .map(function(event) { return event["amount"] })
            .reduce(mixpanel.reducer.numeric_summary());
          }
-        console.log(main())
+        console.log(main())*/
      
       });
     </script>
